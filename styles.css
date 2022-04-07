@@ -1,3 +1,45 @@
 h1 {
-    background-color: blue;
+    height: 10vh;
+    width: 50%;
+    border: 3px solid black;
+    text-align: center;
+    margin: auto;
+}
+
+html, body {
+    background-color: aqua;
+    height: 100vh;
+    margin: 0px;
+}
+
+.contentContainer {
+    background-color: darkred;
+    height: 80vh;
+    width: 90vw;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.optionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 3px solid black;
+    flex: 0 1 auto;
+}
+
+.gridContainer {
+    background-color: bisque;
+    width: 80vh;
+    height: 80vh;
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.pixel {
+    background-color: black;
+    width: 20px; 
+    height: 20px;
 }
