@@ -1,22 +1,31 @@
+/*
+Background-color: #B91B20;
+Title-color: #D09856;
+Accent-color: #70A9A1;
+Text-color: #0B2027;
+Extra-color: #CECFD1;
+*/
+
+
+
 h1 {
     height: 10vh;
     width: 50%;
-    border: 3px solid black;
     text-align: center;
-    margin: auto;
+    margin: 2.5vh auto 2.5vh auto;
+    color: #D09856;
 }
 
-html, body {
-    background-color: aqua;
-    height: 100vh;
-    margin: 0px;
+h2 {
+    color: #0B2027;
 }
 
 .contentContainer {
-    background-color: darkred;
-    height: 80vh;
+    background-color: #B91B20;
+    height: 90vh;
     width: 90vw;
-    margin: auto;
+    margin: 5vh 5vw 5vh 5vw;
+    border-radius: 1vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -26,16 +35,24 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 3px solid black;
-    flex: 0 1 auto;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 12vw;
+}
+
+.contentContainer {
+    display: flex;
 }
 
 .gridContainer {
-    background-color: bisque;
-    width: 80vh;
-    height: 80vh;
+    background-color: #CECFD1;
+    outline:3px solid black;
+    border-radius: 1vh;
+    width: 70vh;
+    height: 70vh;
     display: flex;
     flex: 0 0 auto;
+    align-self: center;
 }
 
 .pixel {
