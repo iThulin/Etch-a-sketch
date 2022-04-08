@@ -9,10 +9,10 @@ Extra-color: #CECFD1;
 
 
 h1 {
-    height: 10vh;
+    height: 5vh;
     width: 50%;
     text-align: center;
-    margin: 2.5vh auto 2.5vh auto;
+    margin: 1vh auto 1vh auto;
     color: #D09856;
 }
 
@@ -24,7 +24,8 @@ h2 {
     background-color: #B91B20;
     height: 90vh;
     width: 90vw;
-    margin: 5vh 5vw 5vh 5vw;
+    margin: 4.5vh 5vw 0px 5vw;
+    border: 3px solid black;
     border-radius: 1vh;
     display: flex;
     flex-direction: row;
@@ -34,22 +35,18 @@ h2 {
 .optionContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex: 0 0 auto;
     width: 12vw;
-}
-
-.contentContainer {
-    display: flex;
 }
 
 .gridContainer {
     background-color: #CECFD1;
     outline:3px solid black;
     border-radius: 1vh;
-    width: 70vh;
-    height: 70vh;
+    width: 75vh;
+    height: 75vh;
     display: flex;
     flex: 0 0 auto;
     align-self: center;
@@ -59,4 +56,14 @@ h2 {
     background-color: black;
     width: 20px; 
     height: 20px;
+}
+
+.knob {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 50%;
+    height: 20vh;
+    width: 20vh;
+    justify-self: end;
+    margin-bottom: 5vh;
 }
