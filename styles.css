@@ -14,7 +14,7 @@ h1 {
     text-align: center;
     margin: 1vh auto 1vh auto;
     color: #D09856;
-    font-size: 6rem;
+    font-size: 8vh;
     text-shadow: 3px 3px black;
 }
 
@@ -51,7 +51,7 @@ h2 {
     border-radius: 1vh;
     width: 75vh;
     height: 75vh;
-    display: flex;
+    display: grid;
     flex: 0 0 auto;
     align-self: center;
 }

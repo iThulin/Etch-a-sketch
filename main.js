@@ -12,10 +12,17 @@ function initiateGrid (size) {
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`
 
+
+    /* determine pixel size based on the grid container's interior area*/
+    let pixelHeight = gridContainer.offsetHeight / size;
+    let pixelWidth = gridContainer.offsetWidth / size;
+
     /* create a div with the pixel class for each pixel on the drawing board*/
     for (let i = 0; i < size ** 2; i++) {
-        var pixel = document.createElement('div')
-        pixel.classList.add("pixel")
+        var pixel = document.createElement('div');
+        pixel.classList.add("pixel");
+        pixel.style.height = `${pixelHeight}px`;
+        pixel.style.width = `${pixelWidth}px`;
         gridContainer.appendChild(pixel);
     }
 }
