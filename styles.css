@@ -9,13 +9,13 @@ Extra-color: #CECFD1;
 
 
 h1 {
-    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
     width: auto;
-    text-align: center;
     margin: 1vh auto 1vh auto;
-    color: #D09856;
     font-size: 8vh;
-    text-shadow: 3px 3px black;
 }
 
 h2 {
@@ -24,12 +24,8 @@ h2 {
 }
 
 .contentContainer {
-    background-color: #B91B20;
-    height: 90vh;
-    width: 90vw;
-    margin: 4.5vh 5vw 0px 5vw;
-    border: 10px solid black;
-    border-radius: 1vh;
+    height: auto;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -47,29 +43,17 @@ h2 {
 
 .gridContainer {
     background-color: #CECFD1;
-    outline:10px solid black;
-    border-radius: 1vh;
-    width: 75vh;
-    height: 75vh;
+    width: 80vh;
+    height: 80vh;
     display: grid;
     flex: 0 0 auto;
     align-self: center;
 }
 
 .pixel {
-    background-color: black;
+    background-color: #CECFD1;
     width: 20px; 
     height: 20px;
-}
-
-.knob {
-    background-color: white;
-    border: 3px solid black;
-    border-radius: 50%;
-    height: 20vh;
-    width: 20vh;
-    justify-self: flex-end;
-    margin-bottom: 5vh;
 }
 
 .settingContainer {
