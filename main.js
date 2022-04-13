@@ -4,7 +4,7 @@ var gridContainer = document.getElementById('gridContainer')
 
 //Clear
 const clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', clear);
+clearButton.addEventListener('click', clearGrid);
 
 //New Grid
 const newGridButton = document.querySelector("#newGrid");
@@ -53,8 +53,9 @@ function newGrid() {
     console.log("New Grid button pressed")
 }
 
-function clear() {
-    console.log("clear button pressed")
+function clearGrid() {
+    let allPixels = gridContainer.querySelectorAll('div');
+    allPixels.forEach(allPixels => allPixels.style.backgroundColor = '#CECFD1');
 }
 
 function removePixels() {
@@ -63,8 +64,13 @@ function removePixels() {
     }
 }
 
-function colorPixel() {
-    this.style.backgroundColor = '#0B2027';
+function colorPixel(color) {
+    switch(color) {
+        case 'reset': 
+            this.style.backgroundColor = '#CECFD1';
+        default:
+            this.style.backgroundColor = '#0B2027';
+    }  
 }
 
 window.onload = () => {
