@@ -1,4 +1,5 @@
 const DEFAULT_SIZE = 20;
+const DEFAULT_COLOR = '#CECFD1';
 
 var gridContainer = document.getElementById('gridContainer')
 
@@ -14,9 +15,9 @@ newGridButton.addEventListener('click', newGrid);
 let sizeSelector = document.querySelector("#gridNumber");
 sizeSelector.value = 20;
 let sizeLabel = document.querySelector("#gridSize")
-sizeLabel.textContent = sizeSelector.value;
+sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
 sizeSelector.addEventListener('mousemove', function() {
-    sizeLabel.textContent = sizeSelector.value;
+    sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
 })
 
 // Functions
@@ -27,12 +28,10 @@ function initiateGrid(size) {
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`
 
-
-    /* determine pixel size based on the grid container's interior area*/
     let pixelHeight = gridContainer.offsetHeight / size;
     let pixelWidth = gridContainer.offsetWidth / size;
 
-    /* create a div with the pixel class for each pixel on the drawing board*/
+    // Create a div with the pixel class for each pixel on the drawing board
     for (let i = 0; i < size ** 2; i++) {
         var pixel = document.createElement('div');
         pixel.classList.add("pixel");
@@ -43,7 +42,8 @@ function initiateGrid(size) {
     }
 
     let pixelsInGrid = gridContainer.querySelectorAll('div');
-    pixelsInGrid.forEach(pixelInGrid => pixelInGrid.addEventListener('mouseover', colorPixel));
+    pixelsInGrid.forEach(pixelInGrid => 
+        pixelInGrid.addEventListener('mouseover', colorPixel));
 }
 
 function newGrid() {
@@ -55,7 +55,8 @@ function newGrid() {
 
 function clearGrid() {
     let allPixels = gridContainer.querySelectorAll('div');
-    allPixels.forEach(allPixels => allPixels.style.backgroundColor = '#CECFD1');
+    allPixels.forEach(allPixels => 
+        allPixels.style.backgroundColor = DEFAULT_COLOR);
 }
 
 function removePixels() {

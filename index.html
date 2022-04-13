@@ -18,18 +18,17 @@
         <div class="contentContainer">
             <div class="optionContainer">
                 <div class="settingContainer">
-                    <button type="button" id="clear">Clear drawing</button> 
-                </div>
-                <div class="settingContainer">
-                    <button type="button" id="newGrid">Create new grid</button>
+                    <h2>Grid Settings</h2>
                     <div class="slideContainer">
+                        <label id="gridSize">16</label>
                         <input type="range" min="1" max="100" class="slider" 
                         id="gridNumber">
-                        <label id="gridSize">16</label>
                     </div>
+                    <button type="button" id="newGrid" class="button">Create new grid</button>
+                    <button type="button" id="clear" class="button">Clear drawing</button> 
                 </div>
                 <div class="settingContainer">
-                    <h2>Color Selection</h2>
+                    <h2>Color Settings</h2>
                 </div>
             </div>
             <div class="gridContainer" id="gridContainer"></div>
