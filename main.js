@@ -24,7 +24,6 @@ clearButton.addEventListener('click', clearGrid);
 const toggleGridButton = document.querySelector('#toggleGrid');
 toggleGridButton.addEventListener('click', function () {
     var toggleState = toggleGridButton.className;
-    console.log(toggleState)
     let allPixels = gridContainer.querySelectorAll('div');
 
     switch (toggleState) {
@@ -74,7 +73,6 @@ function newGrid() {
     removePixels();
     let gridSize = sizeSelector.value;
     initiateGrid(gridSize);
-    console.log("New Grid button pressed")
 }
 
 function clearGrid() {
@@ -91,10 +89,8 @@ function removePixels() {
 
 function colorPixel(color) {
     switch(color) {
-        case 'reset': 
-            this.style.backgroundColor = '#CECFD1';
         default:
-            this.style.backgroundColor = '#0B2027';
+            this.style.backgroundColor = '#000000';
     }  
 }
 
