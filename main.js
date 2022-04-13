@@ -36,10 +36,14 @@ function initiateGrid(size) {
     for (let i = 0; i < size ** 2; i++) {
         var pixel = document.createElement('div');
         pixel.classList.add("pixel");
+        pixel.setAttribute('id', 'pixel');
         pixel.style.height = `${pixelHeight}px`;
         pixel.style.width = `${pixelWidth}px`;
         gridContainer.appendChild(pixel);
     }
+
+    let pixelsInGrid = gridContainer.querySelectorAll('div');
+    pixelsInGrid.forEach(pixelInGrid => pixelInGrid.addEventListener('mouseover', colorPixel));
 }
 
 function newGrid() {
@@ -57,6 +61,10 @@ function removePixels() {
     while(gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild)
     }
+}
+
+function colorPixel() {
+    this.style.backgroundColor = '#0B2027';
 }
 
 window.onload = () => {
