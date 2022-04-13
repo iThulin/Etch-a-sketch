@@ -78,6 +78,14 @@ h2 {
     min-height: 40px;
 }
 
+.toggled {
+    color: #39393a;
+    background-color: #ff8552;
+    border: 1px solid #ff8552;
+    border-radius: 2px;
+    min-height: 40px;
+}
+
 .slideContainer {
     display: flex;
     flex-direction: column;

@@ -3,14 +3,6 @@ const DEFAULT_COLOR = '#CECFD1';
 
 var gridContainer = document.getElementById('gridContainer')
 
-//Clear
-const clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', clearGrid);
-
-//New Grid
-const newGridButton = document.querySelector("#newGrid");
-newGridButton.addEventListener('click', newGrid);
-
 //Size slider and label
 let sizeSelector = document.querySelector("#gridNumber");
 sizeSelector.value = 20;
@@ -19,6 +11,35 @@ sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
 sizeSelector.addEventListener('mousemove', function() {
     sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
 })
+
+//New Grid
+const newGridButton = document.querySelector("#newGrid");
+newGridButton.addEventListener('click', newGrid);
+
+//Clear
+const clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', clearGrid);
+
+//Toggle grid
+const toggleGridButton = document.querySelector('#toggleGrid');
+toggleGridButton.addEventListener('click', function () {
+    var toggleState = toggleGridButton.className;
+    console.log(toggleState)
+    let allPixels = gridContainer.querySelectorAll('div');
+
+    switch (toggleState) {
+        case "button":
+            toggleGridButton.classList.add("toggled");
+            allPixels.forEach(allPixels => 
+                allPixels.style.outline = "1px solid #666666");
+            break;
+        case "button toggled":
+            toggleGridButton.classList.remove('toggled');
+            allPixels.forEach(allPixels => 
+                allPixels.style.outline = "1px solid transparent");
+            break;
+    }
+});
 
 // Functions
 function initiateGrid(size) {
@@ -38,6 +59,9 @@ function initiateGrid(size) {
         pixel.setAttribute('id', 'pixel');
         pixel.style.height = `${pixelHeight}px`;
         pixel.style.width = `${pixelWidth}px`;
+        if (document.querySelector('#toggleGrid').className == "button toggled") {
+            pixel.style.outline = '1px solid #666666'
+        }
         gridContainer.appendChild(pixel);
     }
 
