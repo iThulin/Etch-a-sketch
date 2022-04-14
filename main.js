@@ -1,7 +1,9 @@
 const DEFAULT_SIZE = 20;
-const DEFAULT_COLOR = '#CECFD1';
+const DEFAULT_COLOR = '#000000';
+const BACKGROUND_COLOR = '#CECFD1';
 
 var gridContainer = document.getElementById('gridContainer')
+let selectedColor = DEFAULT_COLOR;
 
 //Size slider and label
 let sizeSelector = document.querySelector('#gridNumber');
@@ -37,6 +39,22 @@ toggleGridButton.addEventListener('click', function () {
             allPixels.forEach(allPixels => 
                 allPixels.style.outline = '1px solid transparent');
             break;
+    };
+});
+
+//Toggle eraser
+const toggleEraserButton = document.querySelector('#toggleEraser');
+toggleEraserButton.addEventListener('click', function () {
+    var toggleState = toggleEraserButton.className;
+    switch (toggleState) {
+        case 'button':
+            //eraser is on
+            toggleEraserButton.classList.add('toggled');
+            return selectedColor = BACKGROUND_COLOR;
+        case 'button toggled':
+            //eraser is off
+            toggleEraserButton.classList.remove('toggled');
+            return selectedColor = DEFAULT_COLOR;
     };
 });
 
@@ -95,7 +113,6 @@ function createPixelEvents(eventInitiator) {
     
     pixelsInGrid.forEach(pixelInGrid => 
         pixelInGrid.removeEventListener('mouseover', colorPixel));
-
     switch (eventInitiator) {
         case 'click':
             pixelsInGrid.forEach(pixelInGrid => 
@@ -126,11 +143,9 @@ function removePixels() {
     };
 };
 
-function colorPixel(color) {
-        switch(color) {
-            default:
-                this.style.backgroundColor = '#000000';
-        };
+function colorPixel() {
+    let pixelColor = selectedColor;
+    this.style.backgroundColor = `${pixelColor}`;
 };
 
 window.onload = () => {
