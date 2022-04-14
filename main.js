@@ -4,16 +4,16 @@ const DEFAULT_COLOR = '#CECFD1';
 var gridContainer = document.getElementById('gridContainer')
 
 //Size slider and label
-let sizeSelector = document.querySelector("#gridNumber");
+let sizeSelector = document.querySelector('#gridNumber');
 sizeSelector.value = 20;
-let sizeLabel = document.querySelector("#gridSize")
+let sizeLabel = document.querySelector('#gridSize')
 sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
 sizeSelector.addEventListener('mousemove', function() {
     sizeLabel.textContent = `Pixels per row: ${sizeSelector.value}`;
-})
+});
 
 //New Grid
-const newGridButton = document.querySelector("#newGrid");
+const newGridButton = document.querySelector('#newGrid');
 newGridButton.addEventListener('click', newGrid);
 
 //Clear
@@ -27,17 +27,35 @@ toggleGridButton.addEventListener('click', function () {
     let allPixels = gridContainer.querySelectorAll('div');
 
     switch (toggleState) {
-        case "button":
-            toggleGridButton.classList.add("toggled");
+        case 'button':
+            toggleGridButton.classList.add('toggled');
             allPixels.forEach(allPixels => 
-                allPixels.style.outline = "1px solid #666666");
+                allPixels.style.outline = '1px solid #666666');
             break;
-        case "button toggled":
+        case 'button toggled':
             toggleGridButton.classList.remove('toggled');
             allPixels.forEach(allPixels => 
-                allPixels.style.outline = "1px solid transparent");
+                allPixels.style.outline = '1px solid transparent');
             break;
-    }
+    };
+});
+
+//Toggle click to draw
+const toggleClickToDraw = document.querySelector('#toggleClick');
+toggleClickToDraw.addEventListener('click', function () {
+    var toggleState = toggleClickToDraw.className;
+    switch (toggleState) {
+        case 'button':
+            //click to draw is turned on
+            toggleClickToDraw.classList.add('toggled');
+            createPixelEvents('click');
+            break;
+        case 'button toggled':
+            //click to draw is turned off
+            toggleClickToDraw.classList.remove('toggled');
+            createPixelEvents('mouse');
+            break;
+    };
 });
 
 // Functions
@@ -54,46 +72,67 @@ function initiateGrid(size) {
     // Create a div with the pixel class for each pixel on the drawing board
     for (let i = 0; i < size ** 2; i++) {
         var pixel = document.createElement('div');
-        pixel.classList.add("pixel");
+        pixel.classList.add('pixel');
         pixel.setAttribute('id', 'pixel');
+        pixel.setAttribute('draggable', false);
         pixel.style.height = `${pixelHeight}px`;
         pixel.style.width = `${pixelWidth}px`;
-        if (document.querySelector('#toggleGrid').className == "button toggled") {
+        if (document.querySelector('#toggleGrid').className == 'button toggled') {
             pixel.style.outline = '1px solid #666666'
-        }
+        };
         gridContainer.appendChild(pixel);
+    };
+    if (document.querySelector('#toggleClick').className == 'button toggled') {
+        createPixelEvents('click');
     }
+    else {
+        createPixelEvents('mouse');
+    };
+};
 
+function createPixelEvents(eventInitiator) {
     let pixelsInGrid = gridContainer.querySelectorAll('div');
+    
     pixelsInGrid.forEach(pixelInGrid => 
-        pixelInGrid.addEventListener('mouseover', colorPixel));
-}
+        pixelInGrid.removeEventListener('mouseover', colorPixel));
+
+    switch (eventInitiator) {
+        case 'click':
+            pixelsInGrid.forEach(pixelInGrid => 
+                pixelInGrid.addEventListener('mousedown', colorPixel));
+            break;
+        case 'mouse':
+            pixelsInGrid.forEach(pixelInGrid => 
+                pixelInGrid.addEventListener('mouseover', colorPixel));
+            break;
+    };
+};
 
 function newGrid() {
     removePixels();
     let gridSize = sizeSelector.value;
     initiateGrid(gridSize);
-}
+};
 
 function clearGrid() {
     let allPixels = gridContainer.querySelectorAll('div');
     allPixels.forEach(allPixels => 
         allPixels.style.backgroundColor = DEFAULT_COLOR);
-}
+};
 
 function removePixels() {
     while(gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild)
-    }
-}
+    };
+};
 
 function colorPixel(color) {
-    switch(color) {
-        default:
-            this.style.backgroundColor = '#000000';
-    }  
-}
+        switch(color) {
+            default:
+                this.style.backgroundColor = '#000000';
+        };
+};
 
 window.onload = () => {
     initiateGrid(DEFAULT_SIZE)
-}
+};
