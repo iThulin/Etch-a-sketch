@@ -1,9 +1,10 @@
 const DEFAULT_SIZE = 20;
 const DEFAULT_COLOR = '#000000';
-const BACKGROUND_COLOR = '#CECFD1';
+const DEFAULT_BACKGROUND = '#CECFD1';
 
 var gridContainer = document.getElementById('gridContainer')
 let selectedColor = DEFAULT_COLOR;
+let backgroundColor = DEFAULT_BACKGROUND;
 
 //Size slider and label
 let sizeSelector = document.querySelector('#gridNumber');
@@ -50,7 +51,7 @@ toggleEraserButton.addEventListener('click', function () {
         case 'button':
             //eraser is on
             toggleEraserButton.classList.add('toggled');
-            return selectedColor = BACKGROUND_COLOR;
+            return selectedColor = backgroundColor;
         case 'button toggled':
             //eraser is off
             toggleEraserButton.classList.remove('toggled');
@@ -74,6 +75,20 @@ toggleClickToDraw.addEventListener('click', function () {
             createPixelEvents('mouse');
             break;
     };
+});
+
+//Pen color input
+const penColorInput = document.querySelector('#penColor')
+penColorInput.value = DEFAULT_COLOR;
+penColorInput.addEventListener('input', function () {
+    selectedColor = penColorInput.value;
+});
+
+//Background color input
+const backgroundColorInput = document.querySelector('#backgroundColor')
+backgroundColorInput.value = DEFAULT_BACKGROUND;
+backgroundColorInput.addEventListener('input', function () {
+    backgroundColor = backgroundColorInput.value;
 });
 
 // Functions
@@ -134,7 +149,7 @@ function newGrid() {
 function clearGrid() {
     let allPixels = gridContainer.querySelectorAll('div');
     allPixels.forEach(allPixels => 
-        allPixels.style.backgroundColor = DEFAULT_COLOR);
+        allPixels.style.backgroundColor = backgroundColor);
 };
 
 function removePixels() {
