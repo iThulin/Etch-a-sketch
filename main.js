@@ -91,6 +91,14 @@ backgroundColorInput.addEventListener('input', function () {
     backgroundColor = backgroundColorInput.value;
 });
 
+//Color swatches
+const colorSwatch = document.querySelectorAll('.swatch');
+document.querySelector('#defaultPen').style.backgroundColor.value = selectedColor;
+colorSwatch.forEach(colorSwatch => 
+    colorSwatch.addEventListener('click', function () {
+        this.style.backgroundColor = selectedColor;
+    }))
+
 // Functions
 function initiateGrid(size) {
     /* Create a grid to hold the pixels. Width and Height are dictated by the 
