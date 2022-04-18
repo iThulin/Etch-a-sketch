@@ -5,6 +5,7 @@ const DEFAULT_BACKGROUND = '#CECFD1';
 var gridContainer = document.getElementById('gridContainer')
 let selectedColor = DEFAULT_COLOR;
 let backgroundColor = DEFAULT_BACKGROUND;
+let tempSelectedColor = '';
 
 //Size slider and label
 let sizeSelector = document.querySelector('#gridNumber');
@@ -43,21 +44,6 @@ toggleGridButton.addEventListener('click', function () {
     };
 });
 
-//Toggle eraser
-const toggleEraserButton = document.querySelector('#toggleEraser');
-toggleEraserButton.addEventListener('click', function () {
-    var toggleState = toggleEraserButton.className;
-    switch (toggleState) {
-        case 'button':
-            //eraser is on
-            toggleEraserButton.classList.add('toggled');
-            return selectedColor = backgroundColor;
-        case 'button toggled':
-            //eraser is off
-            toggleEraserButton.classList.remove('toggled');
-            return selectedColor = DEFAULT_COLOR;
-    };
-});
 
 //Toggle click to draw
 const toggleClickToDraw = document.querySelector('#toggleClick');
@@ -74,6 +60,40 @@ toggleClickToDraw.addEventListener('click', function () {
             toggleClickToDraw.classList.remove('toggled');
             createPixelEvents('mouse');
             break;
+    };
+});
+
+//Toggle eraser
+const toggleEraserButton = document.querySelector('#toggleEraser');
+toggleEraserButton.addEventListener('click', function () {
+    var toggleState = toggleEraserButton.className;
+    switch (toggleState) {
+        case 'button':
+            //eraser is on
+            toggleEraserButton.classList.add('toggled');
+            return selectedColor = backgroundColor;
+        case 'button toggled':
+            //eraser is off
+            toggleEraserButton.classList.remove('toggled');
+            return selectedColor = DEFAULT_COLOR;
+    };
+});
+
+//Toggle Rainbow Mode
+const toggleRainbowButton = document.querySelector('#toggleRainbow');
+toggleRainbowButton.addEventListener('click', function () {
+    var toggleState = toggleRainbowButton.className;
+    
+    switch (toggleState) {
+        case 'button':
+            //rainbow mode is on
+            toggleRainbowButton.classList.add('toggled');
+            setTempColor();
+            return selectedColor = 'RAINBOW';
+        case 'button toggled':
+            //rainbow mode is on
+            toggleRainbowButton.classList.remove('toggled');
+            return selectedColor = tempSelectedColor;
     };
 });
 
@@ -177,7 +197,11 @@ function removePixels() {
 
 function colorPixel() {
     let pixelColor = selectedColor;
-    this.style.backgroundColor = `${pixelColor}`;
+
+    if (selectedColor == 'RAINBOW') {
+        console.log("RAINBOWMODE")
+    }
+    else this.style.backgroundColor = `${pixelColor}`;
 };
 
 function convertToHex(rgbComb) {
@@ -200,6 +224,12 @@ function convertToHex(rgbComb) {
     
         return "#" + r + g + b;
     };
+
+    function setTempColor() {
+        if (selectedColor != 'RAINBOW') {
+            return tempSelectedColor = selectedColor;
+        }
+    }
     
 window.onload = () => {
     initiateGrid(DEFAULT_SIZE)
