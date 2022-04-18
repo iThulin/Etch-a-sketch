@@ -97,7 +97,16 @@ document.querySelector('#defaultPen').style.backgroundColor.value = selectedColo
 colorSwatch.forEach(colorSwatch => 
     colorSwatch.addEventListener('click', function () {
         this.style.backgroundColor = selectedColor;
-    }))
+    }));
+colorSwatch.forEach(colorSwatch => 
+    colorSwatch.addEventListener('auxclick', function (e) {
+        // if button clicked is the middle mouse button
+        if (e.button == 1) {
+            console.log('middle click')
+            let backgroundRGB = this.style.backgroundColor;
+            penColorInput.value = convertToHex(backgroundRGB);
+            return selectedColor = convertToHex(backgroundRGB);
+    }}));
 
 // Functions
 function initiateGrid(size) {
@@ -171,6 +180,27 @@ function colorPixel() {
     this.style.backgroundColor = `${pixelColor}`;
 };
 
+function convertToHex(rgbComb) {
+    // pass a variable in the form rgb(###, ###, ###), strip off rgb(), 
+    //convert the three integers to hexadecimal and return in the form '#rrggbb'
+        let cleanedRGB = rgbComb.replace('rgb(', '')
+        cleanedRGB = cleanedRGB.replace(')', '')
+    
+        let rgbArray = cleanedRGB.split(', ')
+        console.log(rgbArray)
+        
+        let r = parseInt(rgbArray[0]).toString(16);
+        let g = parseInt(rgbArray[1]).toString(16);
+        let b = parseInt(rgbArray[2]).toString(16);
+    
+        if(r.length == 1) {r = "0" + r};
+        if(g.length == 1) {g = "0" + g};
+        if(b.length == 1) {b = "0" + b};
+    
+    
+        return "#" + r + g + b;
+    };
+    
 window.onload = () => {
     initiateGrid(DEFAULT_SIZE)
 };
