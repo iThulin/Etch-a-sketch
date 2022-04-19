@@ -99,6 +99,44 @@ toggleRainbowButton.addEventListener('click', function () {
     };
 });
 
+//Toggle lighten
+const toggleLightenButton = document.querySelector('#toggleLighten');
+toggleLightenButton.addEventListener('click', function () {
+    var toggleState = toggleLightenButton.className;
+
+    switch (toggleState) {
+        case 'button':
+            //lighten mode is on
+            clearColorButtons();
+            toggleLightenButton.classList.add('toggled');
+            setTempColor();
+            return selectedColor = 'LIGHTEN';
+        case 'button toggled':
+            //lighten mode is off
+            clearColorButtons();
+            return selectedColor = tempSelectedColor;
+    };
+});
+
+//Toggle darken
+const toggleDarkenButton = document.querySelector('#toggleDarken');
+toggleDarkenButton.addEventListener('click', function () {
+    var toggleState = toggleDarkenButton.className;
+
+    switch (toggleState) {
+        case 'button':
+            //lighten mode is on
+            clearColorButtons();
+            toggleDarkenButton.classList.add('toggled');
+            setTempColor();
+            return selectedColor = 'DARKEN';
+        case 'button toggled':
+            //lighten mode is off
+            clearColorButtons();
+            return selectedColor = tempSelectedColor;
+    };
+});
+
 //Pen color input
 const penColorInput = document.querySelector('#penColor')
 penColorInput.value = DEFAULT_COLOR;
@@ -149,6 +187,7 @@ function initiateGrid(size) {
         pixel.setAttribute('draggable', false);
         pixel.style.height = `${pixelHeight}px`;
         pixel.style.width = `${pixelWidth}px`;
+        pixel.style.backgroundColor = `${backgroundColor}`;
         if (document.querySelector('#toggleGrid').className == 'button toggled') {
             pixel.style.outline = '1px solid #666666'
         };
@@ -208,8 +247,14 @@ function colorPixel() {
         let rgb = convertToHex(r + ", " + g + ", " + b);
         
         this.style.backgroundColor = `${rgb}`
+    } else if (selectedColor == 'LIGHTEN') {
+        let backgroundRGB = this.style.backgroundColor;
+        this.style.backgroundColor = `${generateLighterRGB(backgroundRGB)}`;
+    } else if (selectedColor == 'DARKEN') {
+        let backgroundRGB = this.style.backgroundColor;
+        this.style.backgroundColor = `${generateDarkerRGB(backgroundRGB)}`;
     }
-    else this.style.backgroundColor = `${pixelColor}`;
+    else  this.style.backgroundColor = `${pixelColor}`;
 };
 
 function convertToHex(rgbComb) {
@@ -239,15 +284,74 @@ function generateRandomRGB(min, max) {
 }
 
 function setTempColor() {
-    if (selectedColor != 'RAINBOW') {
-        return tempSelectedColor = selectedColor;
+    switch (selectedColor) {
+        case 'RAINBOW':
+            return;
+        case 'LIGHTEN':
+            return;
+        case "DARKEN":
+            return;
+        default:
+            return tempSelectedColor = selectedColor;
     }
+};
+
+function generateLighterRGB(backgroundRGB) {
+    let cleanedRGB = backgroundRGB.replace('rgb(', '')
+        cleanedRGB = cleanedRGB.replace(')', '')
+    
+        let rgbArray = cleanedRGB.split(', ')
+
+        let r = parseInt(rgbArray[0]) + 20;
+        let g = parseInt(rgbArray[1]) + 20;
+        let b = parseInt(rgbArray[2]) + 20;
+
+        if (r > 255) {r = 255};
+        if (g > 255) {g = 255};
+        if (b > 255) {b = 255};
+
+        r = r.toString(16);
+        g = g.toString(16);
+        b = b.toString(16);
+    
+        if(r.length == 1) {r = "0" + r};
+        if(g.length == 1) {g = "0" + g};
+        if(b.length == 1) {b = "0" + b};
+    
+        return "#" + r + g + b;
+};
+
+function generateDarkerRGB(backgroundRGB) {
+    let cleanedRGB = backgroundRGB.replace('rgb(', '')
+        cleanedRGB = cleanedRGB.replace(')', '')
+    
+        let rgbArray = cleanedRGB.split(', ')
+
+        let r = parseInt(rgbArray[0]) - 20;
+        let g = parseInt(rgbArray[1]) - 20;
+        let b = parseInt(rgbArray[2]) - 20;
+
+        if (r > 255) {r = 255};
+        if (g > 255) {g = 255};
+        if (b > 255) {b = 255};
+
+        r = r.toString(16);
+        g = g.toString(16);
+        b = b.toString(16);
+    
+        if(r.length == 1) {r = "0" + r};
+        if(g.length == 1) {g = "0" + g};
+        if(b.length == 1) {b = "0" + b};
+    
+        return "#" + r + g + b;
 };
 
 function clearColorButtons() {
     //Remove toggled tags from all buttons that effect the color selection
     toggleRainbowButton.classList.remove('toggled');
     toggleEraserButton.classList.remove('toggled');
+    toggleLightenButton.classList.remove('toggled');
+    toggleDarkenButton.classList.remove('toggled');
 }
     
 window.onload = () => {
