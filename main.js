@@ -199,7 +199,13 @@ function colorPixel() {
     let pixelColor = selectedColor;
 
     if (selectedColor == 'RAINBOW') {
-        console.log("RAINBOWMODE")
+        let r = generateRandomRGB(0, 255);
+        let g = generateRandomRGB(0, 255);
+        let b = generateRandomRGB(0, 255);
+
+        let rgb = convertToHex(r + ", " + g + ", " + b);
+        
+        this.style.backgroundColor = `${rgb}`
     }
     else this.style.backgroundColor = `${pixelColor}`;
 };
@@ -211,7 +217,6 @@ function convertToHex(rgbComb) {
         cleanedRGB = cleanedRGB.replace(')', '')
     
         let rgbArray = cleanedRGB.split(', ')
-        console.log(rgbArray)
         
         let r = parseInt(rgbArray[0]).toString(16);
         let g = parseInt(rgbArray[1]).toString(16);
@@ -221,9 +226,15 @@ function convertToHex(rgbComb) {
         if(g.length == 1) {g = "0" + g};
         if(b.length == 1) {b = "0" + b};
     
-    
         return "#" + r + g + b;
     };
+
+function generateRandomRGB(min, max) {
+    //min & max are both inclusive
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
     function setTempColor() {
         if (selectedColor != 'RAINBOW') {
