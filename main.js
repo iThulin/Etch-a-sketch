@@ -6,6 +6,8 @@ var gridContainer = document.getElementById('gridContainer')
 let selectedColor = DEFAULT_COLOR;
 let backgroundColor = DEFAULT_BACKGROUND;
 let tempSelectedColor = '';
+let drawMode = 'HOVER';
+let mouseDown = false;
 
 //Size slider and label
 let sizeSelector = document.querySelector('#gridNumber');
@@ -45,6 +47,16 @@ toggleGridButton.addEventListener('click', function () {
 });
 
 //Toggle click to draw
+document.addEventListener('mousedown', function (e) {
+    if (e.target.className == "pixel") {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    return mouseDown = true;
+});
+document.addEventListener('mouseup', function () {
+    return mouseDown = false;
+});
 const toggleClickToDraw = document.querySelector('#toggleClick');
 toggleClickToDraw.addEventListener('click', function () {
     var toggleState = toggleClickToDraw.className;
@@ -204,16 +216,16 @@ function initiateGrid(size) {
 function createPixelEvents(eventInitiator) {
     let pixelsInGrid = gridContainer.querySelectorAll('div');
     
-    pixelsInGrid.forEach(pixelInGrid => 
-        pixelInGrid.removeEventListener('mouseover', colorPixel));
     switch (eventInitiator) {
         case 'click':
+            drawMode = 'CLICK';
             pixelsInGrid.forEach(pixelInGrid => 
-                pixelInGrid.addEventListener('mousedown', colorPixel));
+                pixelInGrid.addEventListener('mousemove', colorPixel));
             break;
         case 'mouse':
+            drawMode = 'HOVER';
             pixelsInGrid.forEach(pixelInGrid => 
-                pixelInGrid.addEventListener('mouseover', colorPixel));
+                pixelInGrid.addEventListener('mousemove', colorPixel));
             break;
     };
 };
@@ -238,7 +250,14 @@ function removePixels() {
 
 function colorPixel() {
     let pixelColor = selectedColor;
+    let mode = drawMode;
+    let mouseMode = mouseDown;
 
+    if (mode == 'CLICK') {
+        if (!mouseMode) {
+            return;
+        }
+    }
     if (selectedColor == 'RAINBOW') {
         let r = generateRandomRGB(0, 255);
         let g = generateRandomRGB(0, 255);
