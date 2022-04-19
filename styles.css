@@ -1,5 +1,7 @@
 body {
     background-color: #39393a;
+    margin: 0px 0px 0px 0px;
+    height: 100vh;
 }
 
 label, p, button {
@@ -12,9 +14,9 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 15vh;
+    height: auto;
     width: auto;
-    margin: 1vh auto 1vh auto;
+    margin: auto;
     color: #ff8552;
     font-family: monospace;
     font-size: 5rem;
@@ -39,11 +41,11 @@ p {
 }
 
 .contentContainer {
-    height: auto;
+    height: 100%;
     width: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .optionContainer {
@@ -51,7 +53,13 @@ p {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    gap: 5vh;
+    margin-top: 12vh;
+}
+
+.centerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .gridContainer {
@@ -150,4 +158,22 @@ input[type="color"] {
     height: 5vh;
     width: 5vh;
     border: 1px solid #CECFD1;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: center;
+}
+
+#links {
+    width: auto;
+    height: auto;
+    margin: 1vh 0px 1vh 0px;
+}
+
+img {
+    height: 4vh;
+    margin: 0.5vh 1vh 0px 1vh;
 }
