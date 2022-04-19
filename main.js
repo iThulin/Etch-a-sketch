@@ -44,7 +44,6 @@ toggleGridButton.addEventListener('click', function () {
     };
 });
 
-
 //Toggle click to draw
 const toggleClickToDraw = document.querySelector('#toggleClick');
 toggleClickToDraw.addEventListener('click', function () {
@@ -70,12 +69,14 @@ toggleEraserButton.addEventListener('click', function () {
     switch (toggleState) {
         case 'button':
             //eraser is on
+            clearColorButtons();
             toggleEraserButton.classList.add('toggled');
+            setTempColor();
             return selectedColor = backgroundColor;
         case 'button toggled':
             //eraser is off
-            toggleEraserButton.classList.remove('toggled');
-            return selectedColor = DEFAULT_COLOR;
+            clearColorButtons();
+            return selectedColor = tempSelectedColor;
     };
 });
 
@@ -87,12 +88,13 @@ toggleRainbowButton.addEventListener('click', function () {
     switch (toggleState) {
         case 'button':
             //rainbow mode is on
+            clearColorButtons();
             toggleRainbowButton.classList.add('toggled');
             setTempColor();
             return selectedColor = 'RAINBOW';
         case 'button toggled':
             //rainbow mode is on
-            toggleRainbowButton.classList.remove('toggled');
+            clearColorButtons();
             return selectedColor = tempSelectedColor;
     };
 });
@@ -236,11 +238,17 @@ function generateRandomRGB(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-    function setTempColor() {
-        if (selectedColor != 'RAINBOW') {
-            return tempSelectedColor = selectedColor;
-        }
+function setTempColor() {
+    if (selectedColor != 'RAINBOW') {
+        return tempSelectedColor = selectedColor;
     }
+};
+
+function clearColorButtons() {
+    //Remove toggled tags from all buttons that effect the color selection
+    toggleRainbowButton.classList.remove('toggled');
+    toggleEraserButton.classList.remove('toggled');
+}
     
 window.onload = () => {
     initiateGrid(DEFAULT_SIZE)
